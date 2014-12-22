@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+
+    <article class="template-article">
+      <header class="template-header">
+        <h1>The evolution of XSL/XML with Shadow Dom</h1>
+      </header>
+      <main class="template-main">
+        <p>Javascript bindings from semantic html to templates.</p>
+      </main>
+      <footer class="template-footer">
+        <p>This is a footer</footer>
+      </footer>
+    </article>
+
+  
+    <template class="template-article">
+      <content></content>
+    </template>
+
+    <template class="template-header">
+      <content></content>
+    </template>
+
+    <template class="template-main">
+      <content></content>
+    </template>
+
+    <template class="template-footer">
+      <content></content>
+    </template> 
+
+    <script>
+      var templates = document.getElementsByTagName('template');
+      
+      var classTemplateMapping = {};
+
+      console.log('templates');
+      console.log(templates);
+
+      for (var i = 0; i < templates.length; i++) {
+        console.log('class: ' + templates[i].className);
+        classTemplateMapping[templates[i].className] = templates[i];
+      }
+
+      Object.keys(classTemplateMapping).forEach(function(el, index) {
+        var els = document.getElementsByClassName(el);
+        for (var i = 0; i < els.length; i++) {
+          if (els[i].tagName !== 'TEMPLATE') {
+            var shadowRoot = els[i].createShadowRoot();
+            shadowRoot.appendChild( document.importNode( classTemplateMapping[el].content, true ) );
+          }
+        }
+      });    
+    </script>
+  </body>
+</html>
