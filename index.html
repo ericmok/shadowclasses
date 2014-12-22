@@ -6,10 +6,10 @@
 
     <article class="template-article">
       <header class="template-header">
-        <h1>The evolution of XSL/XML with Shadow Dom</h1>
+        <h1>Shadow Dom</h1>
       </header>
       <main class="template-main">
-        <p>Javascript bindings from semantic html to templates.</p>
+        <p>Bind semantic markup to templates via javascript.</p>
       </main>
       <footer class="template-footer">
         <p>This is a footer</footer>
@@ -18,22 +18,32 @@
 
   
     <template class="template-article">
-      <content></content>
+      Article <content></content>
     </template>
 
     <template class="template-header">
-      <content></content>
+      Header <content></content>
     </template>
 
     <template class="template-main">
-      <content></content>
+      Main <content></content>
     </template>
 
     <template class="template-footer">
-      <content></content>
+      Footer <content></content>
     </template> 
 
+    <button id="dynamicButton">Dynamically add a class</button>
+
     <script>
+
+      function setElementTemplate(element, template) {
+        var shadowRoot = element.createShadowRoot();
+        shadowRoot.appendChild(
+          document.importNode(template.content, true)
+        );
+      }
+
       var templates = document.getElementsByTagName('template');
       
       var classTemplateMapping = {};
@@ -41,6 +51,7 @@
       console.log('templates');
       console.log(templates);
 
+      // Map class names to templates
       for (var i = 0; i < templates.length; i++) {
         console.log('class: ' + templates[i].className);
         classTemplateMapping[templates[i].className] = templates[i];
@@ -50,11 +61,38 @@
         var els = document.getElementsByClassName(el);
         for (var i = 0; i < els.length; i++) {
           if (els[i].tagName !== 'TEMPLATE') {
-            var shadowRoot = els[i].createShadowRoot();
-            shadowRoot.appendChild( document.importNode( classTemplateMapping[el].content, true ) );
+            setElementTemplate(els[i], classTemplateMapping[el]);
           }
         }
-      });    
+      });
+
+      function addTemplateToElement(element) {
+        var classNames = element.className.split(' ');
+        
+        classNames.forEach( function(className) {
+       
+            if (classTemplateMapping[className]) {
+              setElementTemplate(element, classTemplateMapping[className]);
+            }
+
+        });
+      }
+     
+      var observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            console.log('mutation');
+            console.log(mutation);
+            addTemplateToElement(mutation.target);
+          });
+      });
+
+      observer.observe(document.getElementsByTagName('body')[0], {childList: true, subtree: true, attributes: true});
+
+      document.getElementById('dynamicButton').addEventListener('click', function(ev) {
+        console.log('click');
+        this.className += 'template-main';
+      });
+
     </script>
   </body>
 </html>
