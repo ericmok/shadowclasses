@@ -2,9 +2,10 @@
   <h1>shadowdomize</h1>
 </div>
 
-Associates html5 templates with classes.
+Associates html5 templates with classes and injects them as shadow dom.
 
-Inject shadow dom into html so that presentation markup stays in shadow dom and semantic markup stays in light dom.
+Inject shadow dom into html so that presentation markup stays in shadow dom and 
+semantic markup stays in light dom.
 
 ####Example
 
@@ -22,19 +23,20 @@ Inject shadow dom into html so that presentation markup stays in shadow dom and 
     <p>This is a footer</p>
   </footer>
 </article>
+```
 
+```html
 <template class="template-article">
   <style>
-    /** Your styles are  */
+    /** Isolated styles */
     :host { }
   </style>
   <content></content>
 </template>
 
 <template class="template-header">
-  <svg>
-    <!-- Presentation markup -->
-  </svg>
+  <svg><!-- Presentation markup --></svg>
+  <div><!-- Div Soup --></div>
   <content></content>
 </template>
 
@@ -56,6 +58,9 @@ Inject shadow dom into html so that presentation markup stays in shadow dom and 
 Dynamically added shadow dom
 ----------------------------
 
+Shadowdomize will detect changes in the dom and inject shadow dom.
+
+**Caveat:**
 Currently, if you remove a class, the shadow dom will not be deleted.
 
 ```html
