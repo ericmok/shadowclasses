@@ -34,65 +34,7 @@
     </template> 
 
     <button id="dynamicButton">Dynamically add a class</button>
-
-    <script>
-
-      function setElementTemplate(element, template) {
-        var shadowRoot = element.createShadowRoot();
-        shadowRoot.appendChild(
-          document.importNode(template.content, true)
-        );
-      }
-
-      var templates = document.getElementsByTagName('template');
-      
-      var classTemplateMapping = {};
-
-      console.log('templates');
-      console.log(templates);
-
-      // Map class names to templates
-      for (var i = 0; i < templates.length; i++) {
-        console.log('class: ' + templates[i].className);
-        classTemplateMapping[templates[i].className] = templates[i];
-      }
-
-      Object.keys(classTemplateMapping).forEach(function(el, index) {
-        var els = document.getElementsByClassName(el);
-        for (var i = 0; i < els.length; i++) {
-          if (els[i].tagName !== 'TEMPLATE') {
-            setElementTemplate(els[i], classTemplateMapping[el]);
-          }
-        }
-      });
-
-      function addTemplateToElement(element) {
-        var classNames = element.className.split(' ');
-        
-        classNames.forEach( function(className) {
-       
-            if (classTemplateMapping[className]) {
-              setElementTemplate(element, classTemplateMapping[className]);
-            }
-
-        });
-      }
-     
-      var observer = new MutationObserver(function(mutations) {
-          mutations.forEach(function(mutation) {
-            console.log('mutation');
-            console.log(mutation);
-            addTemplateToElement(mutation.target);
-          });
-      });
-
-      observer.observe(document.getElementsByTagName('body')[0], {childList: true, subtree: true, attributes: true});
-
-      document.getElementById('dynamicButton').addEventListener('click', function(ev) {
-        console.log('click');
-        this.className += 'template-main';
-      });
-
-    </script>
+    
+    <script src="shadowdomize.js"></script>
   </body>
 </html>
