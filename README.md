@@ -8,7 +8,7 @@ Inject shadow dom into html so that presentation markup stays in shadow dom and 
 
 Example:
 
-```
+```html
 <article class="template-article">
   <header class="template-header">
     <h1>XSLT/XML but cooler</h1>
@@ -20,9 +20,6 @@ Example:
     <p>This is a footer</footer>
   </footer>
 </article>
-
-<button onclick="this.className='template-dynamic'">Click</button>
-
 
 <template class="template-article">
   <style>
@@ -48,15 +45,22 @@ Example:
 <template class="template-footer">
   <content></content>
 </template>
+```
 
+Dynamically added shadow dom
+----------------------------
+
+```html
 <template class="template-dynamic">
   <!-- The shadow dom will be inserted if new elements or class names get added -->
   <content></content>
 </template>
 
 
-<button onclick="this.className=''" class="template-dynamic">But currently shadow dom doesn't get removed</button>
+<button onclick="this.className='template-dynamic'">Click</button>
 
+<button onclick="this.className=''" class="template-dynamic">But currently shadow dom doesn't get removed</button>
 ```
+
 
 Unlike with XSL/XML, Javascript lets you programmatically define template matching behavior with semantic markup.
