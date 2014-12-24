@@ -1,7 +1,6 @@
 <div align="center">
   <h2>shadowdomize</h2>
 </div>
-========
 
 Associates html5 templates with classes.
 
