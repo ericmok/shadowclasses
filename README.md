@@ -19,7 +19,7 @@ semantic markup stays in light dom.
       Programmable template matching to bind semantic markup to presentation markup.
     </p>
   </main>
-  <footer class="multiple-shadow">
+  <footer class="template-footer multiple-shadow">
     <p>This is a footer</p>
   </footer>
 </article>
