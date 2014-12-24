@@ -1,29 +1,32 @@
 <div align="center">
-  <h2>shadowdomize</h2>
+  <h1>shadowdomize</h1>
 </div>
 
 Associates html5 templates with classes.
 
 Inject shadow dom into html so that presentation markup stays in shadow dom and semantic markup stays in light dom.
 
-Example:
+####Example
 
 ```html
 <article class="template-article">
   <header class="template-header">
-    <h1>XSLT/XML but cooler</h1>
+    <h1>Almost XSLT/XML</h1>
   </header>
-  <main class="template-main">
-    <p>Programmable template matching to bind semantic markup to templates </p>
-    </main>
-  <footer class="template-footer">
-    <p>This is a footer</footer>
+  <main class="secondary-class-name">
+    <p>
+      Programmable template matching to bind semantic markup to presentation markup.
+    </p>
+  </main>
+  <footer class="multiple-shadow">
+    <p>This is a footer</p>
   </footer>
 </article>
 
 <template class="template-article">
   <style>
-    /** Isolated styles */
+    /** Your styles are  */
+    :host { }
   </style>
   <content></content>
 </template>
@@ -32,23 +35,28 @@ Example:
   <svg>
     <!-- Presentation markup -->
   </svg>
-  
-  <!-- Would be nice if we could project content as a different tag -->
   <content></content>
 </template>
 
-<template class="template-main">
-  <!-- barebones -->
+<template class="template-main secondary-class-name">
+  <!-- Two class names -->
   <content></content>
 </template>
 
 <template class="template-footer">
   <content></content>
 </template>
+
+<template class="multiple-shadow">
+  <!-- You can shadow another shadow dom -->
+  <shadow></shadow>
+</template>
 ```
 
 Dynamically added shadow dom
 ----------------------------
+
+Currently, if you remove a class, the shadow dom will not be deleted.
 
 ```html
 <template class="template-dynamic">
@@ -57,10 +65,14 @@ Dynamically added shadow dom
 </template>
 
 
-<button onclick="this.className='template-dynamic'">Click</button>
+<button onclick="this.className='template-dynamic'">Click to add shadow dom</button>
 
-<button onclick="this.className=''" class="template-dynamic">But currently shadow dom doesn't get removed</button>
+<button onclick="this.className=''" class="template-dynamic">Won't work</button>
 ```
 
 
+###### A word on shadow dom and templates
+
 Unlike with XSL/XML, Javascript lets you programmatically define template matching behavior with semantic markup.
+But the shadow dom cannot act as a tree transformer since it is restricted to projecting
+nodes that are only direct decendants of the shadow host.

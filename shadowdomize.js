@@ -50,10 +50,14 @@
   function mapAllTemplatesInDocument() {
     var templates = document.getElementsByTagName('template');
 
-    // Map class names to templates
+    // Map class names to templates in the NodeList
     for (var i = 0; i < templates.length; i++) {
-      //console.log('class: ' + templates[i].className);
-      ShadowDomize.classTemplateMapping[templates[i].className] = templates[i];
+      
+      var classNameSplitted = templates[i].className.split(' ');
+      
+      classNameSplitted.forEach(function(className) {
+        ShadowDomize.classTemplateMapping[className] = templates[i];
+      });
     }
 
     // Go through all instances of elements having the template classes

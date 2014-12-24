@@ -9,11 +9,11 @@
       <header class="template-header">
         <h1>Shadow Dom</h1>
       </header>
-      <main class="template-main">
+      <main class="secondary-class-name">
         <p>Bind semantic markup to templates via javascript.</p>
       </main>
-      <footer class="template-footer">
-        <p>This is a footer</footer>
+      <footer class="template-footer multiple-shadow">
+        <p>This is a footer with 2 shadow roots!</footer>
       </footer>
     </article>
 
@@ -44,7 +44,7 @@
       <content></content>
     </template>
 
-    <template class="template-main">
+    <template class="template-main secondary-class-name">
       <style>
         :host
         {
@@ -65,6 +65,10 @@
       <content></content>
     </template> 
 
+    <template class="multiple-shadow">
+      <shadow></shadow>
+    </template>
+  
   
     <template class="template-dynamically-added">
       <style>
@@ -85,8 +89,8 @@
   
     <script>
     
-    // For testing
-    var i = 0;
+      // For testing
+      var i = 0;
       document.getElementById('dynamicButton').addEventListener('click', function(ev) {
         console.log('click');
         this.className = i % 2 == 0 ? 'template-dynamically-added' : '';
