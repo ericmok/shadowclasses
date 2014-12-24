@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+    <script src="shadowdomize.js"></script>
   </head>
   <body>
 
@@ -18,23 +19,80 @@
 
   
     <template class="template-article">
-      Article <content></content>
+      <style>
+        :host
+        {
+          padding: 10px;
+          border-radius: 4px;
+          border: solid 1px #E0E0E0;
+          background: #EFEFEF;
+          max-width: 700px;
+        }
+      </style>
+      <content></content>
     </template>
 
     <template class="template-header">
-      Header <content></content>
+      <style>
+        :host
+        {
+          padding: 4px;
+          border-bottom: solid 1px #AAA;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+      </style>
+      <content></content>
     </template>
 
     <template class="template-main">
-      Main <content></content>
+      <style>
+        :host
+        {
+          font-size: 16px;
+          line-height: 1.48;
+        }
+      </style>
+      <content></content>
     </template>
 
     <template class="template-footer">
-      Footer <content></content>
+      <style>
+        :host
+        {
+          border-top: solid 1px #AAA;
+        }
+      </style>
+      <content></content>
     </template> 
 
-    <button id="dynamicButton">Dynamically add a class</button>
+  
+    <template class="template-dynamically-added">
+      <style>
+        :host
+        {
+          border: solid 1px #F77;
+          background: #FCC;
+        }
+      </style>
+      <div>
+        Added a class!
+      </div>
+      <content></content>
+    </template>
+  
     
-    <script src="shadowdomize.js"></script>
+    <button id="dynamicButton">Click to dynamically add a class</button>
+  
+    <script>
+    
+    // For testing
+    var i = 0;
+      document.getElementById('dynamicButton').addEventListener('click', function(ev) {
+        console.log('click');
+        this.className = i % 2 == 0 ? 'template-dynamically-added' : '';
+        i += 1;
+      });
+    </script>
+  
   </body>
 </html>

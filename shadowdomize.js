@@ -88,14 +88,6 @@
     console.log('ShadowDomize');
     mapAllTemplatesInDocument();
     watchForChanges();
-    
-    // For testing
-    var i = 0;
-    document.getElementById('dynamicButton').addEventListener('click', function(ev) {
-      console.log('click');
-      this.className = i % 2 == 0 ? 'template-main' : '';
-      i += 1;
-    });
   };
 
 })();
