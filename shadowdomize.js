@@ -6,13 +6,23 @@
   };
 
   /** 
-  Clone template contents and append 
+  Clone template contents and append. When a template is cloned, 
+  it undergoes the shadow classing as well.
   */
   function setElementTemplate(element, template) {
-    var shadowRoot = element.createShadowRoot();
-    shadowRoot.appendChild(
-      document.importNode(template.content, true)
-    );
+    var shadowRoot;
+    
+    var templateContent = template.content;
+    var processedTemplateContent = document.importNode(templateContent, true);
+
+    // Add templates to children too, 
+    if (templateContent.children.length > 0) {
+      shadowSubTree(processedTemplateContent);  
+    }
+   
+    // Finally add the processed subtree to current element's shadow dom
+    shadowRoot = element.createShadowRoot();
+    shadowRoot.appendChild(processedTemplateContent);
   }
 
   
@@ -33,6 +43,18 @@
 //  }
 
   /**
+  Recursively add templates to current element and its children
+   */
+  function shadowSubTree(tree) {
+    for (var i = 0; i < tree.children.length; i++) {
+      shadowSubTree(tree.children[i]);
+
+      addTemplateToElement(tree.children[i]);
+    }
+  }
+  window.shadowSubTree = shadowSubTree;
+
+  /**
   Inspect classes of element and see if we should inject shadow dom
   */
   function addTemplateToElement(element) {
@@ -47,6 +69,11 @@
     });
   }
 
+  /**
+  Called once, it should go through all the templates declared and store them
+  in an internal hash. Then elements containing any of the matching classes
+  will get the treatment.
+   */
   function mapAllTemplatesInDocument() {
     var templates = document.getElementsByTagName('template');
 

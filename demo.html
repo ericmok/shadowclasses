@@ -5,6 +5,8 @@
   </head>
   <body>
 
+    <h4 class="red-style">This text should be red</h4>
+
     <article class="template-article">
       <header class="template-header">
         <h1>Shadow Dom</h1>
@@ -39,9 +41,25 @@
           padding: 4px;
           border-bottom: solid 1px #AAA;
           font-family: Arial, Helvetica, sans-serif;
+	  color: #3F3FCC;
         }
       </style>
-      <content></content>
+      <div class="red-style">
+        <content></content>
+      </div>
+    </template>
+
+    <template class="red-style">
+      <style>
+        .make-me-red
+        {
+          color: red;
+        }
+      </style>
+      <div class="make-me-red">
+        <content>
+        </content>
+      </div>
     </template>
 
     <template class="template-main secondary-class-name">
