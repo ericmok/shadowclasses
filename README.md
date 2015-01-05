@@ -10,21 +10,7 @@ in shadow dom and semantic markup stays in light dom.
 
 ####Example
 
-```html
-<article class="template-article">
-  <header class="template-header">
-    <h1>Almost XSLT/XML</h1>
-  </header>
-  <main class="secondary-class-name">
-    <p>
-      Programmable template matching to bind semantic markup to presentation markup.
-    </p>
-  </main>
-  <footer class="template-footer multiple-shadow">
-    <p>This is a footer</p>
-  </footer>
-</article>
-```
+######1) Declare templates
 
 ```html
 <template class="template-article">
@@ -54,6 +40,24 @@ in shadow dom and semantic markup stays in light dom.
   <!-- You can shadow another shadow dom -->
   <shadow></shadow>
 </template>
+```
+
+######2) Inject templates as shadow dom
+
+```html
+<article class="template-article">
+  <header class="template-header">
+    <h1>Shadow classes</h1>
+  </header>
+  <main class="secondary-class-name">
+    <p>
+      Programmable template matching to bind semantic markup to presentation markup.
+    </p>
+  </main>
+  <footer class="template-footer multiple-shadow">
+    <p>This is a footer</p>
+  </footer>
+</article>
 ```
 
 Nested
