@@ -55,6 +55,23 @@ semantic markup stays in light dom.
 </template>
 ```
 
+Nested
+------
+
+Shadow dom will also be injected as declared when a template is imported.
+
+```
+<template class="another-shadow-class">
+  <p><content></content></p>
+</template>
+
+<template class="shadow-class">
+  <!-- The div will have a shadow root too! -->
+  <div class="another-shadow-class">
+  </div>
+</template>
+```
+
 Dynamically added shadow dom
 ----------------------------
 
