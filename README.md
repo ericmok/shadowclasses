@@ -75,9 +75,3 @@ Currently, if you remove a class, the shadow dom will not be deleted.
 <button onclick="this.className=''" class="template-dynamic">Won't work</button>
 ```
 
-
-###### A word on shadow dom and templates
-
-Unlike with XSL/XML, Javascript lets you programmatically define template matching behavior with semantic markup.
-But the shadow dom cannot act as a tree transformer since it is restricted to projecting
-nodes that are only direct decendants of the shadow host.
