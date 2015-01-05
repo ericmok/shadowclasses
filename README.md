@@ -1,11 +1,12 @@
 <div align="center">
-  <h1>shadowdomize</h1>
+  <h1>Shadow Classes</h1>
 </div>
 
-Associates html5 templates with classes and injects them as shadow dom.
+Lightweight utilty that associates html5 templates with classes 
+and injects them as shadow dom when declared.
 
-Inject shadow dom into html so that presentation markup stays in shadow dom and 
-semantic markup stays in light dom.
+Inject shadow dom into html so that presentation markup stays 
+in shadow dom and semantic markup stays in light dom.
 
 ####Example
 
@@ -60,7 +61,7 @@ Nested
 
 Shadow dom will also be injected as declared when a template is imported.
 
-```
+```html
 <template class="another-shadow-class">
   <p><content></content></p>
 </template>

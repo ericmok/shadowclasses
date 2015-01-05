@@ -1,6 +1,6 @@
 (function() {
 
-  var ShadowDomize = {
+  var ShadowClasses = {
     classTemplateMapping: {},
     ADD_GUARD: 'added'
   };
@@ -27,7 +27,7 @@
 
   
 //  function elementDoesContainShadowDom(element, className) {
-//    var addGuard = element.getAttribute(ShadowDomize.ADD_GUARD);
+//    var addGuard = element.getAttribute(ShadowClasses.ADD_GUARD);
 //    
 //    if (!addGuard) {
 //      return false;
@@ -62,8 +62,8 @@
     
     classNames.forEach( function(className) {
 
-        if (ShadowDomize.classTemplateMapping[className]) {
-          setElementTemplate(element, ShadowDomize.classTemplateMapping[className]);
+        if (ShadowClasses.classTemplateMapping[className]) {
+          setElementTemplate(element, ShadowClasses.classTemplateMapping[className]);
         }
 
     });
@@ -83,16 +83,16 @@
       var classNameSplitted = templates[i].className.split(' ');
       
       classNameSplitted.forEach(function(className) {
-        ShadowDomize.classTemplateMapping[className] = templates[i];
+        ShadowClasses.classTemplateMapping[className] = templates[i];
       });
     }
 
     // Go through all instances of elements having the template classes
-    Object.keys(ShadowDomize.classTemplateMapping).forEach(function(el, index) {
+    Object.keys(ShadowClasses.classTemplateMapping).forEach(function(el, index) {
       var els = document.getElementsByClassName(el);
       for (var i = 0; i < els.length; i++) {
         if (els[i].tagName !== 'TEMPLATE') {
-          setElementTemplate(els[i], ShadowDomize.classTemplateMapping[el]);
+          setElementTemplate(els[i], ShadowClasses.classTemplateMapping[el]);
         }
       }
     });
@@ -116,7 +116,7 @@
   }
 
   window.onload = function() {
-    console.log('ShadowDomize');
+    console.log('ShadowClasses');
     mapAllTemplatesInDocument();
     watchForChanges();
   };
