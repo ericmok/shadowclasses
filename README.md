@@ -51,7 +51,7 @@ in shadow dom and semantic markup stays in light dom.
   </header>
   <main class="secondary-class-name">
     <p>
-      Programmable template matching to bind semantic markup to presentation markup.
+      A template matching mechanism to bind semantic markup to presentation markup.
     </p>
   </main>
   <footer class="template-footer multiple-shadow">
