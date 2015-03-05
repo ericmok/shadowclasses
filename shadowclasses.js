@@ -72,11 +72,17 @@
   /**
   For each template in [templates], store it in the map
   */
-  function registerTemplates(templates) {
+  function registerTemplates(templates, replace) {
+    replace = replace || true;
 
     // Map class names to templates in the NodeList
     for (var i = 0; i < templates.length; i++) {
       
+      // TODO: Testing
+      if (replace && templates[i].getAttribute('data-registered-shadow-class') === "true") {
+        continue;
+      }
+
       var classNameSplitted = templates[i].className.split(' ');
       
       classNameSplitted.forEach(function(className) {
@@ -121,6 +127,7 @@
     var importLinks = document.querySelectorAll('link[rel="import"]');
     importLinks = Array.prototype.slice.call(importLinks, 0);
     importLinks.forEach(function(link, index) {
+      registerTemplates(link.import.querySelectorAll('template'));
       registerTemplates(link.import.querySelectorAll('template'));
     }.bind(this));
 
