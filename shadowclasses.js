@@ -70,32 +70,68 @@
   }
 
   /**
-  Called once, it should go through all the templates declared and store them
-  in an internal hash. Then elements containing any of the matching classes
-  will get the treatment.
-   */
-  function mapAllTemplatesInDocument() {
-    var templates = document.getElementsByTagName('template');
+  For each template in [templates], store it in the map
+  */
+  function registerTemplates(templates, replace) {
+    replace = replace || true;
 
     // Map class names to templates in the NodeList
     for (var i = 0; i < templates.length; i++) {
       
+      // TODO: Testing
+      if (replace && templates[i].getAttribute('data-registered-shadow-class') === "true") {
+        continue;
+      }
+
       var classNameSplitted = templates[i].className.split(' ');
       
       classNameSplitted.forEach(function(className) {
         ShadowClasses.classTemplateMapping[className] = templates[i];
       });
-    }
 
-    // Go through all instances of elements having the template classes
+      templates[i].setAttribute('data-registered-shadow-class', 'true');
+    }
+  }
+
+  /**
+  Go through all elements in the DOM having the template classes
+  stored in the internal hash and inject shadow dom.
+
+  This is used to bootstrap shadow classes for statically declared elements.
+  */
+  function scanShadowClasssesAndInject() {
     Object.keys(ShadowClasses.classTemplateMapping).forEach(function(el, index) {
+
+      // Scan
       var els = document.getElementsByClassName(el);
+
       for (var i = 0; i < els.length; i++) {
         if (els[i].tagName !== 'TEMPLATE') {
           setElementTemplate(els[i], ShadowClasses.classTemplateMapping[el]);
         }
       }
     });
+  }
+
+  /**
+  Called once, it should go through all the templates declared both
+  in the current doc and imported docs and store them
+  in an internal hash. Then elements containing any of the matching classes
+  will get the treatment.
+   */
+  function mapAllTemplatesInDocument() {
+    var docTemplates = document.getElementsByTagName('template');
+    registerTemplates(docTemplates);
+
+    // TODO: Dynamically added link imports
+    var importLinks = document.querySelectorAll('link[rel="import"]');
+    importLinks = Array.prototype.slice.call(importLinks, 0);
+    importLinks.forEach(function(link, index) {
+      registerTemplates(link.import.querySelectorAll('template'));
+      registerTemplates(link.import.querySelectorAll('template'));
+    }.bind(this));
+
+    scanShadowClasssesAndInject();
   }
 
   /** 

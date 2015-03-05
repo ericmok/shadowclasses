@@ -1,0 +1,82 @@
+
+<template class="template-article">
+  <style>
+    :host
+    {
+      padding: 10px;
+      border-radius: 4px;
+      border: solid 1px #E0E0E0;
+      background: #EFEFEF;
+      max-width: 700px;
+    }
+  </style>
+  <content></content>
+</template>
+
+<template class="template-header">
+  <style>
+    :host
+    {
+      padding: 4px;
+      border-bottom: solid 1px #AAA;
+      font-family: Arial, Helvetica, sans-serif;
+  color: #3F3FCC;
+    }
+  </style>
+  <div class="red-style">
+    <content></content>
+  </div>
+</template>
+
+<template class="red-style">
+  <style>
+    .make-me-red
+    {
+      color: red;
+    }
+  </style>
+  <div class="make-me-red">
+    <content>
+    </content>
+  </div>
+</template>
+
+<template class="template-main secondary-class-name">
+  <style>
+    :host
+    {
+      font-size: 16px;
+      line-height: 1.48;
+    }
+  </style>
+  <content></content>
+</template>
+
+<template class="template-footer">
+  <style>
+    :host
+    {
+      border-top: solid 1px #AAA;
+    }
+  </style>
+  <content></content>
+</template> 
+
+<template class="multiple-shadow">
+  <shadow></shadow>
+</template>
+
+
+<template class="template-dynamically-added">
+  <style>
+    :host
+    {
+      border: solid 1px #F77;
+      background: #FCC;
+    }
+  </style>
+  <div>
+    Added a class!
+  </div>
+  <content></content>
+</template>
